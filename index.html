@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b36">
+  <meta name="description" content="책을 끝까지 읽는 아이에서 작품을 이해하고 생각을 표현하는 아이로. 예온쌤의 문학독해 클래스">
+  <title>예온쌤 문학독해 | 문학 작품을 꼼꼼히 읽고 분석하는 수업</title>
+  <style>
+    :root {
+      --ink: #202b28;
+      --muted: #68736e;
+      --green: #173b36;
+      --green-2: #28564d;
+      --green-soft: #e8f0eb;
+      --cream: #f7f5ee;
+      --paper: #fffefa;
+      --line: #e6e5dc;
+      --gold: #e7bd63;
+      --coral: #d77d62;
+      --blue: #dbe9ec;
+      --radius: 24px;
+      --shadow: 0 18px 60px rgba(31, 50, 43, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif; font-size: 16px; line-height: 1.7; letter-spacing: -.025em; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+    .top-note { padding: 9px 18px; text-align: center; background: #f3e9d0; color: #6c5524; font-size: 13px; font-weight: 700; }
+    .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,254,250,.94); border-bottom: 1px solid rgba(230,229,220,.85); backdrop-filter: blur(14px); }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 850; color: var(--green); letter-spacing: -.04em; white-space: nowrap; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px 11px 11px 4px; background: var(--green); color: #fff8e7; font-family: Georgia, serif; font-size: 17px; font-weight: 700; }
+    .brand small { display: block; color: #84908a; font-size: 9px; letter-spacing: .17em; line-height: 1.1; }
+    .nav-links { display: flex; align-items: center; gap: 25px; color: #56615c; font-size: 13px; font-weight: 650; }
+    .nav-links a:hover { color: var(--green-2); }
+    .nav-cta, .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border: 0; border-radius: 999px; background: var(--green); color: white; font-size: 14px; font-weight: 750; transition: transform .2s ease, background .2s ease; }
+    .nav-cta { min-height: 40px; padding: 0 17px; font-size: 12px; }
+    .btn:hover, .nav-cta:hover { background: var(--green-2); transform: translateY(-2px); }
+    .btn-light { background: #fffefa; color: var(--green); border: 1px solid #dfe5df; }
+    .btn-light:hover { background: var(--green-soft); color: var(--green); }
+    .hero { position: relative; overflow: hidden; padding: 94px 0 82px; background: var(--cream); }
+    .hero::before { content: ""; position: absolute; width: 430px; height: 430px; border: 1px solid rgba(23,59,54,.08); border-radius: 50%; right: -120px; top: -115px; box-shadow: 0 0 0 45px rgba(23,59,54,.025), 0 0 0 90px rgba(23,59,54,.02); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 62px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--green-2); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; border-radius: 3px; background: var(--gold); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 670px; margin: 21px 0 20px; color: var(--green); font-size: clamp(40px, 5.3vw, 65px); line-height: 1.16; letter-spacing: -.07em; }
+    h1 em { position: relative; z-index: 0; font-style: normal; white-space: nowrap; }
+    h1 em::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 1px; height: 13px; background: #edce82; opacity: .75; }
+    .hero-lead { max-width: 560px; color: #596660; font-size: 17px; line-height: 1.85; }
+    .hero-lead strong { color: var(--green); font-weight: 800; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 27px; }
+    .tag { padding: 7px 12px; border: 1px solid #dce4dc; border-radius: 999px; color: #53645c; background: rgba(255,254,250,.65); font-size: 12px; font-weight: 700; }
+    .hero-art { min-height: 370px; position: relative; display: grid; place-items: center; }
+    .orbit { position: absolute; width: 340px; height: 340px; border: 1px solid #dbe2d8; border-radius: 50%; }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid #e5e6dc; border-radius: 50%; }
+    .orbit::before { inset: 24px; }.orbit::after { inset: 52px; }
+    .book-card { position: relative; z-index: 1; width: min(330px, 88%); padding: 25px; border: 1px solid #e5e3d7; border-radius: 7px 22px 22px 7px; background: #fffefa; box-shadow: var(--shadow); transform: rotate(-3deg); }
+    .book-card::before { content: ""; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: #eee9dc; }
+    .book-label { display: flex; justify-content: space-between; color: #87918b; font-size: 10px; font-weight: 750; letter-spacing: .1em; }
+    .book-card h3 { margin: 18px 0 8px; color: var(--green); font-size: 23px; line-height: 1.35; letter-spacing: -.055em; }
+    .book-card p { margin-bottom: 17px; color: #6a756f; font-size: 12px; }
+    .book-rule { height: 1px; margin: 10px 0; background: #e8e8df; }
+    .note-line { display: flex; align-items: flex-start; gap: 9px; color: #52615a; font-size: 12px; line-height: 1.55; }
+    .note-line span { flex: 0 0 20px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 7px; background: var(--green-soft); color: var(--green); font-weight: 800; }
+    .sticky-note { position: absolute; right: 2px; bottom: 24px; width: 154px; padding: 15px 16px; border-radius: 4px 15px 15px 15px; background: #f0d28a; color: #594923; box-shadow: 0 12px 30px rgba(91,74,33,.12); font-size: 12px; font-weight: 750; line-height: 1.5; transform: rotate(5deg); }
+    .sticky-note small { display: block; margin-bottom: 5px; color: #80692f; font-size: 9px; letter-spacing: .12em; }
+    .enroll-strip { padding: 18px 0; border-bottom: 1px solid var(--line); background: #fffefa; }
+    .enroll-grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 28px; color: #46564f; font-size: 13px; font-weight: 750; text-align: center; }
+    .enroll-grid span::before { content: "•"; margin-right: 8px; color: #7b9b87; }
+    .enroll-grid strong { color: var(--green); }
+    .keep-word { white-space: nowrap; }
+    section { padding: 92px 0; }
+    .section-head { max-width: 690px; margin: 0 auto 42px; text-align: center; }
+    .section-head .eyebrow { justify-content: center; }
+    h2 { margin: 15px 0 12px; color: var(--green); font-size: clamp(29px, 4vw, 43px); line-height: 1.28; letter-spacing: -.06em; }
+    .section-head p { margin-bottom: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .concern-section { background: #fffefa; }
+    .concern-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .concern-card { min-height: 185px; padding: 23px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .concern-card .num { display: inline-grid; place-items: center; width: 30px; height: 30px; margin-bottom: 16px; border-radius: 10px; background: #f4eddb; color: #8a6d2e; font-size: 11px; font-weight: 850; }
+    .concern-card h3 { margin-bottom: 8px; color: #283b35; font-size: 17px; line-height: 1.4; letter-spacing: -.04em; }
+    .concern-card p { margin-bottom: 0; color: #77817b; font-size: 13px; line-height: 1.7; }
+    .method-section { background: var(--green); color: white; }
+    .method-section .eyebrow { color: #e3ca8c; }
+    .method-section h2 { color: #fffdf6; }
+    .method-section .section-head p { color: #c4d1ca; }
+    .method-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+    .method-card { position: relative; min-height: 240px; padding: 23px 20px; border: 1px solid rgba(255,255,255,.18); border-radius: 18px; background: rgba(255,255,255,.07); }
+    .method-card .step { display: block; margin-bottom: 31px; color: #e4c66f; font-family: Georgia,serif; font-size: 13px; letter-spacing: .12em; }
+    .method-card h3 { margin-bottom: 10px; color: #fffef8; font-size: 18px; letter-spacing: -.04em; }
+    .method-card p { margin-bottom: 0; color: #c6d3cd; font-size: 13px; line-height: 1.75; }
+    .method-note { max-width: 760px; margin: 22px auto 0; padding: 17px 20px; border-radius: 14px; background: rgba(255,255,255,.11); color: #f4f1e5; font-size: 13px; text-align: center; }
+    .method-note strong { color: #f0d48d; }
+    .grade-section { background: var(--cream); }
+    .grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grade-card { position: relative; overflow: hidden; padding: 30px; border: 1px solid #e3e4d9; border-radius: var(--radius); background: #fffefa; }
+    .grade-card.low { background: #fdfbf4; }.grade-card.high { background: #f4f8f6; }
+    .grade-card .grade { color: #8a6a2d; font-size: 11px; font-weight: 850; letter-spacing: .12em; }
+    .grade-card.high .grade { color: var(--green-2); }
+    .grade-card h3 { margin: 9px 0 14px; color: var(--green); font-size: 26px; letter-spacing: -.06em; }
+    .grade-time { display: inline-flex; margin: 0 0 14px; padding: 8px 12px; border-radius: 999px; background: #e8f0e9; color: #385747; font-size: 14px; font-weight: 750; }
+    .grade-card p { max-width: 430px; color: #67736c; font-size: 14px; line-height: 1.8; }
+    .grade-card ul { display: grid; gap: 9px; margin: 18px 0 0; padding: 0; list-style: none; }
+    .grade-card li { display: flex; gap: 9px; color: #46564e; font-size: 13px; }
+    .grade-card li::before { content: "✓"; color: #54816f; font-weight: 900; }
+    .grade-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+    .ops-actions,.cta-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; }
+    .cta-actions { margin-top:24px; }
+    .materials-section { background: #fffefa; }
+    .materials-grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+    .materials-stack { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .material-row { display: grid; grid-template-columns: 48px 1fr; gap: 15px; align-items: center; padding: 16px 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .material-row .icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: var(--green-soft); color: var(--green); font-size: 18px; font-weight: 800; }
+    .material-row h3 { margin: 0 0 3px; color: #2c4038; font-size: 15px; }
+    .material-row p { margin: 0; color: #77817b; font-size: 12px; line-height: 1.6; }
+            .flow-section { background: var(--cream); }
+    .flow-list { max-width: 850px; margin: 0 auto; display: grid; gap: 0; }
+    .flow-item { display: grid; grid-template-columns: 54px 1fr; gap: 18px; padding: 21px 0; border-bottom: 1px solid #e1e1d8; }
+    .flow-item:last-child { border-bottom: 0; }
+    .flow-number { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 15px; background: var(--green); color: #fff7e4; font-size: 12px; font-weight: 850; }
+    .flow-item h3 { margin: 0 0 4px; color: var(--green); font-size: 17px; }
+    .flow-item p { margin: 0; color: #707b74; font-size: 13px; line-height: 1.75; }
+    .review-section { background: #fffefa; }
+    .review-card { max-width: 780px; margin: 0 auto; padding: 38px; border: 1px solid #e7e5da; border-radius: 22px; background: #fbfaf5; text-align: center; }
+    .quote-mark { color: #c3a25c; font-family: Georgia,serif; font-size: 55px; line-height: .8; }
+    .review-card blockquote { margin: 15px auto 20px; color: #33463e; font-size: clamp(18px, 2.3vw, 23px); line-height: 1.75; font-weight: 650; letter-spacing: -.045em; }
+    .review-card cite { color: #7a857e; font-size: 12px; font-style: normal; }
+    .concern-grid { grid-template-columns: repeat(2,1fr); }
+    .concern-card { min-height: 0; padding: 26px; }
+    .concern-kicker { display: block; margin: -4px 0 8px; color: #8a6d2e; font-size: 11px; font-weight: 800; letter-spacing: .04em; }
+    .concern-card p { color: #637169; font-size: 14px; }
+    .concern-solution { display: grid; gap: 5px; margin-top: 19px; padding-top: 15px; border-top: 1px solid #e8e6da; color: #53665b; font-size: 13px; line-height: 1.7; }
+    .concern-solution strong { color: var(--green); font-size: 12px; }
+    .review-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: -12px 0 60px; }
+    .review-tabs a { padding: 11px 18px; border: 1px solid #dfe5df; border-radius: 999px; background: #f7f8f4; color: var(--green); font-size: 13px; font-weight: 750; }
+    .review-tabs a:hover { background: var(--green); color: white; }
+    .review-block { display: grid; grid-template-columns: .78fr 1.22fr; align-items: center; gap: 42px; padding: 46px 0; border-top: 1px solid #e8e6dc; scroll-margin-top: 80px; min-width: 0; }
+    .review-block-heading { max-width: 420px; }
+    .review-block-heading h3 { margin: 13px 0 11px; color: var(--green); font-size: 27px; line-height: 1.4; letter-spacing: -.055em; }
+    .review-block-heading p { margin: 0; color: #6d7972; font-size: 14px; line-height: 1.8; }
+    .photo-review-block { display: grid; grid-template-columns: 1fr; gap: 25px; min-width: 0; }
+    .photo-review-block .review-block-heading { max-width: 760px; }
+    .carousel-hint { margin: -10px 0 12px; color: var(--muted); font-size: 13px; text-align: right; }
+    .review-carousel { display: flex; cursor: grab; user-select: none; -webkit-user-select: none; gap: 18px; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; overflow-x: auto; overflow-y: hidden; padding: 2px 2px 18px; scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; scrollbar-color: #789185 #e8ece8; scrollbar-width: thin; }
+    .review-carousel.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+    .review-carousel::-webkit-scrollbar { height: 8px; }
+    .review-carousel::-webkit-scrollbar-track { border-radius: 8px; background: #e8ece8; }
+    .review-carousel::-webkit-scrollbar-thumb { border-radius: 8px; background: #789185; }
+    .review-slide { flex: 0 0 clamp(285px, 34vw, 390px); display: flex; justify-content: center; align-items: flex-start; margin: 0; padding: 11px; border: 1px solid #e1e5df; border-radius: 18px; background: #f5f7f4; scroll-snap-align: start; }
+    .review-slide a { display: block; line-height: 0; }
+    .review-slide img { display: block; width: 100%; height: auto; max-height: 680px; object-fit: contain; object-position: top center; border-radius: 9px; }
+    .single-review { overflow: visible; }
+    .single-review .review-slide { flex-basis: min(390px, 100%); }
+    .samples-block { padding-top: 48px; border-top: 1px solid #e8e6dc; scroll-margin-top: 80px; }
+    .samples-block .review-block-heading { max-width: 640px; margin: 0 auto 28px; text-align: center; }
+    .sample-grid { grid-template-columns: repeat(5, minmax(0,1fr)); }
+    .review-block .review-card { width: 100%; max-width: none; padding: 31px; }
+    .samples-block { padding-top: 48px; border-top: 1px solid #e8e6dc; scroll-margin-top: 80px; }
+    .samples-block .review-block-heading { max-width: 640px; margin: 0 auto 28px; text-align: center; }
+    .sample-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 14px; }
+    .sample-card { overflow: hidden; display: flex; flex-direction: column; border: 1px solid #e4e4da; border-radius: 17px; background: #fff; box-shadow: 0 8px 25px rgba(34,55,43,.05); transition: transform .2s ease, box-shadow .2s ease; }
+    .sample-card:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(34,55,43,.1); }
+    .sample-card img { display: block; width: 100%; height: 250px; object-fit: cover; object-position: top center; background: #f6f5ef; }
+    .sample-caption { display: grid; gap: 5px; padding: 15px 16px 17px; }
+    .sample-caption strong { color: var(--green); font-size: 14px; }
+    .sample-caption small { color: #758078; font-size: 12px; line-height: 1.55; }
+    .teacher-section { background: #f1f4f0; }
+    .teacher-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto; }
+    .teacher-photo { display: block; width: min(100%, 260px); aspect-ratio: 3 / 4; margin: auto; border-radius: 24px; object-fit: cover; object-position: center 28%; box-shadow: var(--shadow); }
+    .teacher-copy h2 { margin-top: 13px; font-size: 32px; }
+    .teacher-copy p { color: #65736b; font-size: 14px; line-height: 1.85; }
+    .teacher-credentials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .credential { padding: 7px 10px; border: 1px solid #d4dfd6; border-radius: 8px; color: #526259; font-size: 11px; font-weight: 700; }
+    .fit-section { background: #fffefa; }
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .fit-card { padding: 27px; border: 1px solid var(--line); border-radius: 20px; }
+    .fit-card.good { background: #f2f7f3; }.fit-card.not { background: #faf8f2; }
+    .fit-card h3 { margin: 0 0 17px; color: var(--green); font-size: 18px; }
+    .fit-card ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .fit-card li { display: flex; gap: 10px; color: #58665e; font-size: 13px; line-height: 1.6; }
+    .fit-card.good li::before { content: "✓"; color: #538271; font-weight: 900; }.fit-card.not li::before { content: "–"; color: #a38d59; font-weight: 900; }
+    .faq-section { background: var(--cream); }
+    .faq-list { max-width: 850px; margin: 0 auto; border-top: 1px solid #dedfd6; }
+    details { border-bottom: 1px solid #dedfd6; }
+    summary { position: relative; padding: 20px 42px 20px 4px; color: #34483f; font-size: 15px; font-weight: 750; cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; right: 8px; top: 17px; color: #668073; font-size: 22px; font-weight: 400; }
+    details[open] summary::after { content: "−"; }
+    .faq-answer { padding: 0 34px 20px 4px; color: #6e7972; font-size: 13px; line-height: 1.8; }
+    .cta-section { padding: 78px 0; background: var(--green); color: white; text-align: center; }
+    .cta-section .eyebrow { justify-content: center; color: #e5cf90; }
+    .cta-section h2 { max-width: 680px; margin: 15px auto; color: #fffdf5; }
+    .cta-section p { max-width: 600px; margin: 0 auto 24px; color: #d1dcd5; font-size: 14px; }
+    .cta-section .btn { background: #f1d58f; color: #334339; }
+    .cta-section .btn:hover { background: #f7e3ac; }
+    .update-note { margin-top: 20px; color: #b6c7be; font-size: 11px; }
+    footer { padding: 24px 0 35px; background: #12332f; color: #c1cec6; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; font-size: 11px; }
+    .footer-inner strong { color: #fff9e9; font-size: 13px; }
+    .footer-links { display: flex; gap: 17px; }
+    @media (max-width: 850px) {
+      .nav-links { display: none; }
+      .hero { padding: 70px 0 58px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 22px; }
+      .hero-copy { text-align: center; }
+      .hero-copy .eyebrow, .hero-actions, .hero-tags { justify-content: center; }
+      .hero-lead { margin-left: auto; margin-right: auto; }
+      .hero-art { min-height: 340px; }
+      .proof-grid { grid-template-columns: 1fr 1fr; row-gap: 16px; }
+      .method-grid { grid-template-columns: 1fr 1fr; }
+      .materials-grid { grid-template-columns: 1fr; }
+      .teacher-grid { grid-template-columns: 1fr; text-align: center; }
+      .teacher-credentials { justify-content: center; }
+      .sample-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 32px, 1120px); }
+      .top-note { font-size: 11px; }
+      .nav { min-height: 62px; }
+      .nav-cta { min-height: 36px; padding: 0 12px; font-size: 11px; }
+      .brand { font-size: 13px; }
+      .hero { padding: 58px 0 45px; }
+      h1 { margin-top: 17px; font-size: 40px; }
+      .hero-lead { font-size: 15px; }
+      .hero-art { min-height: 300px; }
+      .orbit { width: 280px; height: 280px; }
+      .book-card { width: min(300px, 90%); padding: 21px; }
+      .sticky-note { right: 0; bottom: 9px; width: 133px; font-size: 11px; }
+      .proof-item { gap: 7px; font-size: 11px; }
+      section { padding: 68px 0; }
+      .concern-grid { grid-template-columns: 1fr; }
+      .concern-card { min-height: auto; }
+      .materials-stack { grid-template-columns: 1fr; }
+      .review-tabs { margin-bottom: 35px; }
+      .review-block { grid-template-columns: 1fr; gap: 20px; padding: 35px 0; }
+      .review-block-heading h3 { font-size: 24px; }
+      .review-slide { flex-basis: 80vw; }
+      .review-slide img { max-height: 610px; }
+      .sample-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .sample-card img { height: 220px; }
+
+      .method-grid, .grade-grid, .fit-grid { grid-template-columns: 1fr; }
+      .method-card { min-height: auto; }
+      .method-card .step { margin-bottom: 18px; }
+      .grade-card { padding: 23px; }
+      .review-card { padding: 28px 22px; }
+      .teacher-photo { width: min(100%, 220px); }
+      .teacher-copy h2 { font-size: 28px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    .hero h1 { max-width:680px; font-size:clamp(40px,5.4vw,68px); line-height:1.17; letter-spacing:-.06em; }
+    .hero-brandline { margin-top:16px; color:var(--green); font-size:17px; font-weight:850; }
+    .parent-concerns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0; padding:0; list-style:none; }
+    .parent-concerns li { position:relative; padding:18px 18px 18px 48px; border:1px solid #e8e7dc; border-radius:16px; background:#fff; color:#44554c; line-height:1.65; }
+    .parent-concerns li:before { content:"✓"; position:absolute; left:18px; top:17px; color:#678873; font-weight:900; }
+    .reason-section,.benefit-section,.writing-section,.operations-section { background:#f1f4f0; }
+    .reason-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .reason-grid article,.material-detail-grid article,.quiz-grid article { padding:24px; border:1px solid #e4e8e1; border-radius:18px; background:#fff; }
+    .reason-grid article>span,.material-detail-grid article>span { color:#8a6a2d; font-size:12px; font-weight:850; }
+    .reason-grid h3,.material-detail-grid h3,.quiz-grid h3 { margin:12px 0 8px; color:var(--green); font-size:19px; }
+    .reason-grid p,.material-detail-grid p,.quiz-grid p { margin:0; color:#68746d; line-height:1.75; font-size:14px; }
+    .reason-close,.compare-close,.benefit-close { margin:34px auto 0; text-align:center; color:#53635a; line-height:1.8; }
+    .reason-close strong,.compare-close strong,.benefit-close strong { color:var(--green); }
+    .three-steps { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .three-steps .method-card { min-height:280px; }
+    .foundation-note,.curriculum-note,.revision-note { margin-top:24px; padding:22px 25px; border-radius:16px; background:rgba(255,255,255,.1); color:#f8f8f2; }
+    .foundation-note strong,.curriculum-note strong,.revision-note strong { display:block; margin-bottom:8px; font-size:16px; }
+    .foundation-note p { margin:0; color:#d9e2dc; line-height:1.8; font-size:14px; }
+    .compare-section,.quiz-section { background:#fffefa; }
+    .comparison-wrap { overflow-x:auto; border:1px solid #e5e5dc; border-radius:16px; background:#fff; }
+    .comparison-table { width:100%; border-collapse:collapse; min-width:500px; }
+    .comparison-table th,.comparison-table td { padding:15px 20px; border-bottom:1px solid #ecece5; text-align:left; }
+    .comparison-table th { background:#f4f5ef; color:var(--green); font-size:14px; }
+    .comparison-table td { color:#657169; font-size:14px; }
+    .comparison-table td+td { color:#354d3f; font-weight:700; background:#fbfcf8; }
+    .week-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .week-card { padding:28px; border:1px solid #e4e8e1; border-radius:22px; background:#fff; }
+    .week-card.odd { background:#fffefa; }.week-card.even { background:#f5f8f5; }
+    .week-label { display:inline-block; padding:7px 11px; border-radius:999px; background:#e7eee7; color:#48654f; font-size:13px; font-weight:800; }
+    .week-card h3 { margin:17px 0 20px; color:var(--green); font-size:25px; line-height:1.35; }
+    .week-card>div { padding-top:14px; margin-top:14px; border-top:1px solid #e7e9e2; }
+    .week-card h4 { margin:0 0 8px; color:#7b6539; font-size:14px; }
+    .week-card ul,.writing-columns ul { margin:0; padding-left:20px; color:#5f6e64; font-size:14px; line-height:1.85; }
+    .curriculum-note { background:#edf2eb; color:#405646; }
+    .curriculum-note span { display:block; color:#637169; line-height:1.75; font-size:14px; }
+    .benefit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .benefit-grid article { display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid #e2e8e0; border-radius:16px; background:#fff; }
+    .benefit-grid strong { min-width:58px; color:#927533; font-size:28px; letter-spacing:-.05em; }
+    .benefit-grid span { color:#53635a; font-size:14px; line-height:1.5; }
+    .material-detail-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:24px; }
+    .materials-note { margin:20px 0 32px; color:#69766e; text-align:center; font-size:14px; }
+    .writing-path { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; margin:30px 0; }
+    .writing-path span { padding:11px 15px; border-radius:999px; background:#fff; color:#405b48; font-size:14px; font-weight:750; }
+    .writing-path b { color:#a88a4a; }
+    .writing-columns,.quiz-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .writing-columns article { padding:25px; border-radius:18px; background:#fff; }
+    .writing-columns h3 { margin:0 0 10px; color:var(--green); font-size:20px; }
+    .writing-columns p,.revision-note p { color:#657169; font-size:14px; line-height:1.75; }
+    .revision-note { background:#e7eee7; color:#405646; }
+    .revision-note p { margin:0; font-size:13px; }
+    .quiz-grid article>span { color:#8a6a2d; font-size:13px; font-weight:800; }
+    .quiz-note { margin-top:18px; color:#69766e; font-size:14px; text-align:center; }
+    .ops-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .ops-grid article { display:flex; flex-direction:column; gap:8px; padding:20px; border:1px solid #e1e8df; border-radius:16px; background:#fff; }
+    .ops-grid article span { color:#758078; font-size:13px; }.ops-grid article strong { color:var(--green); font-size:17px; }
+    .enrollment-note { margin:20px 0; color:#69766e; text-align:center; font-size:14px; line-height:1.7; }
+    .ops-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    @media(max-width:760px) { .parent-concerns,.reason-grid,.three-steps,.week-grid,.benefit-grid,.material-detail-grid,.writing-columns,.quiz-grid,.ops-grid { grid-template-columns:1fr; } .three-steps .method-card { min-height:auto; } .week-card { padding:22px; } .writing-path { gap:7px; } .writing-path span { padding:9px 11px; font-size:13px; } .comparison-table th,.comparison-table td { padding:12px; font-size:13px; } }
+
+
+    .hero h1 { max-width:680px; font-size:clamp(40px,5.4vw,68px); line-height:1.17; letter-spacing:-.06em; }
+    .hero-brandline { margin-top:16px; color:var(--green); font-size:17px; font-weight:850; }
+    .parent-concerns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0; padding:0; list-style:none; }
+    .parent-concerns li { position:relative; padding:18px 18px 18px 48px; border:1px solid #e8e7dc; border-radius:16px; background:#fff; color:#44554c; line-height:1.65; }
+    .parent-concerns li:before { content:"✓"; position:absolute; left:18px; top:17px; color:#678873; font-weight:900; }
+    .reason-section,.benefit-section,.writing-section,.operations-section { background:#f1f4f0; }
+    .reason-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .reason-grid article,.quiz-grid article { padding:24px; border:1px solid #e4e8e1; border-radius:18px; background:#fff; }
+    .reason-grid article>span { color:#8a6a2d; font-size:12px; font-weight:850; }
+    .reason-grid h3,.quiz-grid h3 { margin:12px 0 8px; color:var(--green); font-size:19px; }
+    .reason-grid p,.quiz-grid p { margin:0; color:#68746d; line-height:1.75; font-size:14px; }
+    .reason-close,.compare-close,.benefit-close { margin:34px auto 0; text-align:center; color:#53635a; line-height:1.8; }
+    .reason-close strong,.compare-close strong,.benefit-close strong { color:var(--green); }
+    .three-steps { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .three-steps .method-card { min-height:280px; }
+    .foundation-note,.curriculum-note,.revision-note { margin-top:24px; padding:22px 25px; border-radius:16px; background:rgba(255,255,255,.1); color:#f8f8f2; }
+    .foundation-note strong,.curriculum-note strong,.revision-note strong { display:block; margin-bottom:8px; font-size:16px; }
+    .foundation-note p { margin:0; color:#d9e2dc; line-height:1.8; font-size:14px; }
+    .compare-section,.quiz-section { background:#fffefa; }
+    .comparison-wrap { overflow-x:auto; border:1px solid #e5e5dc; border-radius:16px; background:#fff; }
+    .comparison-table { width:100%; border-collapse:collapse; min-width:500px; }
+    .comparison-table th,.comparison-table td { padding:15px 20px; border-bottom:1px solid #ecece5; text-align:left; }
+    .comparison-table th { background:#f4f5ef; color:var(--green); font-size:14px; }
+    .comparison-table td { color:#657169; font-size:14px; }
+    .comparison-table td+td { color:#354d3f; font-weight:700; background:#fbfcf8; }
+    .week-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .week-card { padding:28px; border:1px solid #e4e8e1; border-radius:22px; background:#fff; }
+    .week-card.odd { background:#fffefa; }.week-card.even { background:#f5f8f5; }
+    .week-label { display:inline-block; padding:7px 11px; border-radius:999px; background:#e7eee7; color:#48654f; font-size:13px; font-weight:800; }
+    .week-card h3 { margin:17px 0 20px; color:var(--green); font-size:25px; line-height:1.35; }
+    .week-card>div { padding-top:14px; margin-top:14px; border-top:1px solid #e7e9e2; }
+    .week-card h4 { margin:0 0 8px; color:#7b6539; font-size:14px; }
+    .week-card ul,.writing-columns ul { margin:0; padding-left:20px; color:#5f6e64; font-size:14px; line-height:1.85; }
+    .curriculum-note { background:#edf2eb; color:#405646; }
+    .curriculum-note span { display:block; color:#637169; line-height:1.75; font-size:14px; }
+    .benefit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .benefit-grid article { display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid #e2e8e0; border-radius:16px; background:#fff; }
+    .benefit-grid strong { min-width:58px; color:#927533; font-size:28px; letter-spacing:-.05em; }
+    .benefit-grid span { color:#53635a; font-size:14px; line-height:1.5; }
+    .material-detail-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:24px; }
+    .materials-note { margin:20px 0 32px; color:#69766e; text-align:center; font-size:14px; }
+    .samples-block .review-block-heading { max-width:700px; margin:46px auto 20px; text-align:center; }
+    .samples-block .review-block-heading .eyebrow { justify-content:center; }
+    .writing-path { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; margin:30px 0; }
+    .writing-path span { padding:11px 15px; border-radius:999px; background:#fff; color:#405b48; font-size:14px; font-weight:750; }
+    .writing-path b { color:#a88a4a; }
+    .writing-columns,.quiz-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .writing-columns article { padding:25px; border-radius:18px; background:#fff; }
+    .writing-columns h3 { margin:0 0 10px; color:var(--green); font-size:20px; }
+    .writing-columns p,.revision-note p { color:#657169; font-size:14px; line-height:1.75; }
+    .revision-note { background:#e7eee7; color:#405646; }
+    .revision-note p { margin:0; font-size:13px; }
+    .quiz-grid article>span { color:#8a6a2d; font-size:13px; font-weight:800; }
+    .quiz-note { margin-top:18px; color:#69766e; font-size:14px; text-align:center; }
+    .ops-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .ops-grid article { display:flex; flex-direction:column; gap:8px; padding:20px; border:1px solid #e1e8df; border-radius:16px; background:#fff; }
+    .ops-grid article span { color:#758078; font-size:13px; }.ops-grid article strong { color:var(--green); font-size:17px; }
+    .enrollment-note { margin:20px 0; color:#69766e; text-align:center; font-size:14px; line-height:1.7; }
+    .ops-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    @media(max-width:760px) { .parent-concerns,.reason-grid,.three-steps,.week-grid,.benefit-grid,.material-detail-grid,.writing-columns,.quiz-grid,.ops-grid { grid-template-columns:1fr; } .three-steps .method-card { min-height:auto; } .week-card { padding:22px; } .writing-path { gap:7px; } .writing-path span { padding:9px 11px; font-size:13px; } .comparison-table th,.comparison-table td { padding:12px; font-size:13px; } }
+
+
+    .hero h1 { max-width:680px; font-size:clamp(40px,5.4vw,68px); line-height:1.17; letter-spacing:-.06em; }
+    .hero-brandline { margin-top:16px; color:var(--green); font-size:17px; font-weight:850; }
+    .parent-concerns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0; padding:0; list-style:none; }
+    .parent-concerns li { position:relative; padding:18px 18px 18px 48px; border:1px solid #e8e7dc; border-radius:16px; background:#fff; color:#44554c; line-height:1.65; }
+    .parent-concerns li:before { content:"✓"; position:absolute; left:18px; top:17px; color:#678873; font-weight:900; }
+    .reason-section,.benefit-section,.writing-section,.operations-section { background:#f1f4f0; }
+    .reason-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .reason-grid article,.material-detail-grid article,.quiz-grid article { padding:24px; border:1px solid #e4e8e1; border-radius:18px; background:#fff; }
+    .reason-grid article>span,.material-detail-grid article>span { color:#8a6a2d; font-size:12px; font-weight:850; }
+    .reason-grid h3,.material-detail-grid h3,.quiz-grid h3 { margin:12px 0 8px; color:var(--green); font-size:19px; }
+    .reason-grid p,.material-detail-grid p,.quiz-grid p { margin:0; color:#68746d; line-height:1.75; font-size:14px; }
+    .reason-close,.compare-close,.benefit-close { margin:34px auto 0; text-align:center; color:#53635a; line-height:1.8; }
+    .reason-close strong,.compare-close strong,.benefit-close strong { color:var(--green); }
+    .three-steps { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .three-steps .method-card { min-height:280px; }
+    .foundation-note,.curriculum-note,.revision-note { margin-top:24px; padding:22px 25px; border-radius:16px; background:rgba(255,255,255,.1); color:#f8f8f2; }
+    .foundation-note strong,.curriculum-note strong,.revision-note strong { display:block; margin-bottom:8px; font-size:16px; }
+    .foundation-note p { margin:0; color:#d9e2dc; line-height:1.8; font-size:14px; }
+    .compare-section,.quiz-section { background:#fffefa; }
+    .comparison-wrap { overflow-x:auto; border:1px solid #e5e5dc; border-radius:16px; background:#fff; }
+    .comparison-table { width:100%; border-collapse:collapse; min-width:500px; }
+    .comparison-table th,.comparison-table td { padding:15px 20px; border-bottom:1px solid #ecece5; text-align:left; }
+    .comparison-table th { background:#f4f5ef; color:var(--green); font-size:14px; }
+    .comparison-table td { color:#657169; font-size:14px; }
+    .comparison-table td+td { color:#354d3f; font-weight:700; background:#fbfcf8; }
+    .week-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    .week-card { padding:28px; border:1px solid #e4e8e1; border-radius:22px; background:#fff; }
+    .week-card.odd { background:#fffefa; }.week-card.even { background:#f5f8f5; }
+    .week-label { display:inline-block; padding:7px 11px; border-radius:999px; background:#e7eee7; color:#48654f; font-size:13px; font-weight:800; }
+    .week-card h3 { margin:17px 0 20px; color:var(--green); font-size:25px; line-height:1.35; }
+    .week-card>div { padding-top:14px; margin-top:14px; border-top:1px solid #e7e9e2; }
+    .week-card h4 { margin:0 0 8px; color:#7b6539; font-size:14px; }
+    .week-card ul,.writing-columns ul { margin:0; padding-left:20px; color:#5f6e64; font-size:14px; line-height:1.85; }
+    .curriculum-note { background:#edf2eb; color:#405646; }
+    .curriculum-note span { display:block; color:#637169; line-height:1.75; font-size:14px; }
+    .benefit-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .benefit-grid article { display:flex; align-items:center; gap:14px; padding:18px 20px; border:1px solid #e2e8e0; border-radius:16px; background:#fff; }
+    .benefit-grid strong { min-width:58px; color:#927533; font-size:28px; letter-spacing:-.05em; }
+    .benefit-grid span { color:#53635a; font-size:14px; line-height:1.5; }
+    .material-detail-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:24px; }
+    .materials-note { margin:20px 0 32px; color:#69766e; text-align:center; font-size:14px; }
+    .writing-path { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px; margin:30px 0; }
+    .writing-path span { padding:11px 15px; border-radius:999px; background:#fff; color:#405b48; font-size:14px; font-weight:750; }
+    .writing-path b { color:#a88a4a; }
+    .writing-columns,.quiz-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+    .writing-columns article { padding:25px; border-radius:18px; background:#fff; }
+    .writing-columns h3 { margin:0 0 10px; color:var(--green); font-size:20px; }
+    .writing-columns p,.revision-note p { color:#657169; font-size:14px; line-height:1.75; }
+    .revision-note { background:#e7eee7; color:#405646; }
+    .revision-note p { margin:0; font-size:13px; }
+    .quiz-grid article>span { color:#8a6a2d; font-size:13px; font-weight:800; }
+    .quiz-note { margin-top:18px; color:#69766e; font-size:14px; text-align:center; }
+    .ops-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .ops-grid article { display:flex; flex-direction:column; gap:8px; padding:20px; border:1px solid #e1e8df; border-radius:16px; background:#fff; }
+    .ops-grid article span { color:#758078; font-size:13px; }.ops-grid article strong { color:var(--green); font-size:17px; }
+    .enrollment-note { margin:20px 0; color:#69766e; text-align:center; font-size:14px; line-height:1.7; }
+    .ops-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    @media(max-width:760px) { .parent-concerns,.reason-grid,.three-steps,.week-grid,.benefit-grid,.material-detail-grid,.writing-columns,.quiz-grid,.ops-grid { grid-template-columns:1fr; } .three-steps .method-card { min-height:auto; } .week-card { padding:22px; } .writing-path { gap:7px; } .writing-path span { padding:9px 11px; font-size:13px; } .comparison-table th,.comparison-table td { padding:12px; font-size:13px; } }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="예온쌤 문학독해 처음으로">
+        <span class="brand-mark">YE</span><span><small>YEON READING CLASS</small>예온쌤 문학독해</span>
+      </a>
+      <nav class="nav-links" aria-label="페이지 메뉴">
+        <a href="#why">학부모 고민</a><a href="#method">수업 방식</a><a href="#flow">월간 수업</a><a href="#materials">자료</a><a href="#reviews">후기</a><a href="#faq">FAQ</a>
+      </nav>
+      <a class="nav-cta" href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">LITERATURE · CLOSE READING</span>
+          <h1>책을 끝까지 읽는 아이,<br>과연 작품을 제대로<br><em>이해하고 있을까요?</em></h1>
+          <p class="hero-lead">책을 읽었다는 것과<br>책을 이해했다는 것은 다릅니다.<br><strong>책을 읽는 아이에서<br>작품을 이해하는 아이로.</strong></p>
+          <p class="hero-brandline">예온쌤의 문학독해 클래스</p>
+          <div class="hero-actions"><a class="btn" href="#method">수업 구성 보기</a><a class="btn btn-light" href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의하기</a></div>
+          
+        </div>
+        <div class="hero-art" aria-label="문학 작품 분석을 표현한 책 모양 그림">
+          <div class="orbit"></div>
+          <article class="book-card">
+            <div class="book-label"><span>READ · NOTICE · ANALYZE</span><span>01</span></div>
+            <h3>읽은 책이<br>아이의 생각과 말이 되도록</h3>
+            <p>작품을 읽고, 질문하고, 생각을 표현합니다.</p>
+            <div class="book-rule"></div>
+            <div class="note-line"><span>•</span><div>인물과 사건을 살펴요</div></div>
+            <div class="book-rule"></div>
+            <div class="note-line"><span>•</span><div>갈등과 마음의 변화를 찾아요</div></div>
+            <div class="book-rule"></div>
+            <div class="note-line"><span>•</span><div>표현과 주제를 생각해요</div></div>
+          </article>
+          <div class="sticky-note"><small>READ BETWEEN THE LINES</small>작품 속 단서를<br>하나씩 찾아 읽어요</div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="concern-section" id="why"><div class="wrap"><div class="section-head"><span class="eyebrow">PARENTS' CONCERNS</span><h2>혹시 우리 아이도<br>이런가요?</h2></div><ul class="parent-concerns"><li>책을 다 읽었는데 무슨 내용인지 제대로 설명하지 못해요.</li><li>주인공이 왜 그렇게 행동했는지 물으면 모른다고 해요.</li><li>어떤 생각이 들었냐고 하면 “그냥 재미있었어.”라고 해요.</li><li>책은 꾸준히 읽는데 읽고 나면 남는 게 없는 것 같아요.</li><li>독서감상문을 쓰라고 하면 줄거리만 잔뜩 써요.</li><li>글쓰기만 시작하면 무엇을 써야 할지 모르겠다고 해요.</li><li>책을 읽고 어떤 질문을 해 줘야 할지 엄마도 모르겠어요.</li></ul></div></section>
+
+    <section class="reason-section" id="why-reading"><div class="wrap"><div class="section-head"><span class="eyebrow">WHY CLOSE READING</span><h2>책을 읽는 것과<br>작품을 깊이 읽는 것은 다릅니다.</h2><p>책을 꾸준히 읽어 왔지만, 작품을 어떻게 읽어야 하는지 배울 기회는 충분하지 않았을 수 있습니다. 지금까지의 독서 지도가 잘못되었다는 뜻이 아니라, 작품을 읽는 방법을 더해 볼 시점이라는 의미입니다.</p></div><div class="reason-grid"><article><span>01</span><h3>인물의 마음 읽기</h3><p>말과 행동, 상황을 근거로 인물의 마음을 짐작합니다.</p></article><article><span>02</span><h3>사건의 흐름 잇기</h3><p>사건이 일어난 이유와 그 결과를 연결합니다.</p></article><article><span>03</span><h3>갈등과 변화 찾기</h3><p>인물이 무엇을 겪으며 어떻게 달라지는지 따라갑니다.</p></article><article><span>04</span><h3>작품의 의미 발견하기</h3><p>표현과 장면을 살펴 작품의 주제와 의미를 생각합니다.</p></article><article><span>05</span><h3>스스로 질문하기</h3><p>궁금한 점을 직접 만들고 근거를 찾아 생각을 넓힙니다.</p></article><article><span>06</span><h3>내 언어로 표현하기</h3><p>읽고 생각한 내용을 말과 글로 구체적으로 표현합니다.</p></article></div><p class="reason-close">이제는 책을 얼마나 많이 읽었는지만이 아니라,<br><strong>한 권의 책을 어떻게 읽고 있는지</strong>도 함께 살펴볼 때입니다.</p></div></section>
+
+    
+
+    <section class="method-section" id="method"><div class="wrap"><div class="section-head"><span class="eyebrow">HOW WE READ</span><h2>책을 읽는 아이에서<br>작품을 이해하는 아이로.</h2><p>작품을 읽는 방법부터 질문하고 생각하는 방법, 자신의 생각을 글로 표현하는 방법까지 가르칩니다.<br><strong>독서 × 문학독해 × 어휘·문법 × 글쓰기</strong></p></div><div class="method-grid three-steps"><article class="method-card"><span class="step">STEP 01 · READ</span><h3>작품을 깊이 읽습니다.</h3><p>모든 작품을 같은 방법으로 읽지 않습니다. 인물의 마음, 갈등, 시대적 배경 등 작품마다 무엇에 집중해야 하는지 구체적인 읽기 전략을 배웁니다.</p></article><article class="method-card"><span class="step">STEP 02 · QUESTION & THINK</span><h3>스스로 질문하고<br>깊이 생각합니다.</h3><p>아이가 직접 만든 질문과 작품별 단계 질문으로 생각을 나눕니다. 선생님과 친구들의 생각을 들으며 글쓰기에 필요한 생각과 글감을 마련합니다.</p></article><article class="method-card"><span class="step">STEP 03 · ANALYZE & WRITE</span><h3>분석하고<br>자신의 생각을 표현합니다.</h3><p>빠작 문학독해로 작품 감상 방법을 적용하고 정답·오답의 근거를 확인합니다. 읽고 생각한 내용은 작품에 맞는 글로 표현하고 매주 개별 피드백을 받습니다.</p></article></div><div class="foundation-note"><strong>학년군과 작품에 맞춘 어휘·문법</strong><p>어휘와 문법은 모든 학년에서 같은 범위로 다루지 않습니다. 작품과 주차별 학습 목표에 맞춰 필요한 내용을 정하고, 학년군별 학습자료를 매주 별도로 제공합니다.</p></div></div></section>
+
+    <section class="compare-section" id="difference"><div class="wrap"><div class="section-head"><span class="eyebrow">READING TO UNDERSTANDING</span><h2>같은 책을 읽어도,<br>읽는 방법은 다릅니다.</h2><p>일반적인 독서 활동에 작품을 깊이 이해하고 표현하는 과정을 더합니다.</p></div><div class="comparison-wrap"><table class="comparison-table"><thead><tr><th>읽고 끝나는 독서 활동</th><th>예온쌤의 문학독해</th></tr></thead><tbody><tr><td>책을 끝까지 읽기</td><td>작품별 읽기 전략 배우기</td></tr><tr><td>줄거리 확인하기</td><td>인물·사건·배경 깊이 이해하기</td></tr><tr><td>주어진 질문에 답하기</td><td>스스로 질문 만들기</td></tr><tr><td>느낀 점 이야기하기</td><td>근거를 들어 생각 나누기</td></tr><tr><td>독서감상문 작성하기</td><td>작품 맞춤형 다양한 글쓰기</td></tr><tr><td>글을 쓰고 활동 마무리</td><td>개별 피드백과 고쳐쓰기</td></tr></tbody></table></div><p class="compare-close">한 권의 책을 읽는 경험이<br><strong>깊이 있는 이해와 생각, 표현으로 이어지도록.</strong></p></div></section>
+
+    
+
+    <section class="grade-section" id="levels">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">BY LEARNING STAGE</span><h2>큰 수업 흐름은 같고,<br>학년에 맞춰 깊이를 조정합니다.</h2><p>작품 감상 방법으로 읽고 문제집으로 분석하는 큰 틀은 같습니다.<br>어휘와 문학 이론의 깊이, 필요한 문법 설명을 학년군에 맞춰 조정합니다.</p></div>
+        <div class="grade-grid">
+          <article class="grade-card low"><span class="grade">GRADES 3–4</span><h3>초3·4반</h3><div class="grade-time">금요일 저녁 7시 30분</div><p>초등 3·4학년은 작품의 장면과 인물의 마음을 살펴 읽고, 작품에 맞는 질문과 글쓰기로 자신의 생각을 표현합니다.</p><ul><li>작품 속 장면과 표현 살펴보기</li><li>인물의 말과 행동에서 마음 짐작하기</li><li>엄마 가이드와 독후활동으로 읽기 이어가기</li></ul><div class="grade-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScidhe3F6vaxd08Nj03WfEbTBwfYTOUNco9BIYGUa19HKxdlQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초3·4반 신청하기</a></div></article>
+          <article class="grade-card high"><span class="grade">GRADES 5–6</span><h3>초5·6반</h3><div class="grade-time">금요일 저녁 9시</div><p>초등 5·6학년은 작품 속 근거를 바탕으로 인물과 갈등, 문학 개념을 살펴보고 생각을 글로 표현합니다.</p><ul><li>작품 속 근거로 인물·갈등·표현 분석하기</li><li>필요한 문학 이론과 문법을 함께 익히기</li><li>학년별 연계독서와 독후활동으로 확장하기</li></ul><div class="grade-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdJi2x88S1RdyPBfvusc630nxcYTZzCTp6jPVUhgncUbJEWWQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초5·6반 신청하기</a></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="materials-section" id="materials">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">WEEKLY MATERIALS</span><h2>작품에 맞춰 직접 만든 자료로<br>읽기부터 글쓰기까지 연결합니다.</h2><p>학생용 워크북과 학부모 가이드로 작품을 이해하고 표현하는 과정을 돕습니다.</p></div>
+        <div class="materials-grid">
+          <div class="materials-stack">
+            <article class="material-row"><span class="icon">어</span><div><h3>필수 어휘·문법 학습자료</h3><p>어휘·문법 자료는 매주 별도로 제공합니다. 학년군과 작품, 주차별 학습 목표에 따라 내용과 범위를 달리합니다.</p></div></article>
+            <article class="material-row"><span class="icon">집</span><div><h3>학부모 독서 질문 가이드</h3><p>매주 제공. 핵심 전략, 주목할 장면, 맞춤 질문과 꼬리 질문, 가정 대화와 글쓰기 방법을 담습니다.</p></div></article>
+            <article class="material-row"><span class="icon">독</span><div><h3>학생용 독서·글쓰기 워크북</h3><p>매주 제공. 읽기 목표, 배경지식, 질문 만들기, 단계적 사고 활동, 작품 맞춤형 글쓰기를 연결합니다.</p></div></article>
+            <article class="material-row"><span class="icon">책</span><div><h3>문학독해 핵심 정리자료</h3><p>2·4주차 제공. 작품에 따라 인물 관계, 심리 변화, 사건 흐름, 갈등과 문학 개념을 정리합니다.</p></div></article>
+            <article class="material-row"><span class="icon">퀴</span><div><h3>매주 클래스룸 학습 퀴즈</h3><p>1·3주차 작품 이해도, 2·4주차 어휘·문법 응용을 확인합니다. 연계도서 퀴즈는 없습니다.</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flow-section" id="flow"><div class="wrap"><div class="section-head"><span class="eyebrow">MONTHLY CURRICULUM</span><h2>한 달에 두 번은 책 깊게 읽기,<br>두 번은 문학독해.</h2><p>월 4회, 회당 60분 Zoom 수업입니다. 매주 독서와 작품 맞춤 글쓰기, 개별 피드백이 이어집니다.</p></div><div class="week-grid"><article class="week-card odd"><span class="week-label">1·3주차 · 책 깊게 읽기</span><h3>줄거리를 넘어<br>작품의 의미를 발견합니다.</h3><div><h4>수업 전</h4><ul><li>빠작 문학독해 수록 작품의 전체 도서 읽기</li><li>작품별 핵심 읽기 전략 확인</li><li>클래스룸 작품 이해도 퀴즈 10문항</li><li>아이가 직접 만든 질문 1개 제출</li></ul></div><div><h4>수업 중</h4><ul><li>작품별 읽기 전략과 단계 질문</li><li>아이 질문으로 생각 나누기</li><li>짧은 글쓰기와 학년군별 필수 어휘·문법</li></ul></div><div><h4>수업 후</h4><ul><li>작품 맞춤형 독후 글쓰기 워크북 작성</li><li>개별 글쓰기 피드백</li></ul></div></article><article class="week-card even"><span class="week-label">2·4주차 · 빠작 문학독해</span><h3>이미 읽은 작품을 바탕으로<br>분석하는 법을 배웁니다.</h3><div><h4>수업 전</h4><ul><li>빠작 문학독해 지문 읽기</li><li>문제 미리 풀기</li></ul></div><div><h4>수업 중</h4><ul><li>작품 감상 방법 적용</li><li>인물·사건·배경·갈등·주제 분석</li><li>작품 관련 문학 개념 학습</li><li>정답과 오답의 근거 확인</li></ul></div><div><h4>수업 후</h4><ul><li>문학독해 핵심 정리자료 복습</li><li>연계도서 1권 읽기와 맞춤형 독후 글쓰기</li><li>개별 글쓰기 피드백</li><li>앞선 홀수 주차 어휘·문법 응용 퀴즈</li></ul></div></article></div><div class="curriculum-note"><strong>2·4주차 실시간 수업은 문학독해 지도에 집중합니다.</strong><span>연계도서는 수업 후 읽는 필수 과제이며, 학부모 가이드와 학생용 워크북을 활용해 가정에서 활동합니다. 도서는 별도로 제공하지 않습니다. 별도의 연계도서 확인 퀴즈는 실시하지 않습니다.</span></div></div></section>
+
+    <section class="benefit-section" id="monthly-benefits"><div class="wrap"><div class="section-head"><span class="eyebrow">A MONTH OF READING & WRITING</span><h2>한 달 동안 쌓이는<br>작품 이해의 과정</h2><p>읽고, 질문하고, 근거를 찾고, 글로 표현하는 경험을 매주 반복합니다.</p></div><div class="benefit-grid"><article><strong>4권</strong><span>매주 한 권의 독서</span></article><article><strong>4편</strong><span>작품 맞춤형 독후 글쓰기</span></article><article><strong>4회</strong><span>개별 글쓰기 피드백</span></article><article><strong>4회</strong><span>학부모 독서 질문 가이드</span></article><article><strong>4회</strong><span>실시간 온라인 수업</span></article><article><strong>4회</strong><span>클래스룸 학습 퀴즈</span></article><article><strong>2회</strong><span>책 깊게 읽기 수업</span></article><article><strong>2회</strong><span>빠작 문학독해 수업</span></article><article><strong>2회</strong><span>학년군별 어휘·문법 학습</span></article></div><p class="benefit-close">매주 읽고 쓰는 과정 속에서<br><strong>작품 이해와 생각, 표현의 힘을 함께 기릅니다.</strong></p></div></section>
+<section class="writing-section" id="writing"><div class="wrap"><div class="section-head"><span class="eyebrow">READ · THINK · WRITE</span><h2>무엇을 써야 할지 모르겠다는 아이에게<br>생각부터 글로 옮기는 방법을 가르칩니다.</h2><p>무작정 글을 쓰게 하지 않습니다. 작품을 읽고 질문하고 생각을 나누며 글감을 마련한 뒤, 자신의 글 한 편을 완성합니다.</p></div><div class="writing-path"><span>작품 읽기</span><b>→</b><span>질문 만들기</span><b>→</b><span>생각 나누기</span><b>→</b><span>글쓰기</span><b>→</b><span>피드백</span></div><div class="writing-columns"><article><h3>작품에 맞춰 달라지는 글쓰기</h3><p>독서감상문만 반복하지 않고 작품과 학년군에 맞는 다양한 형식으로 씁니다.</p><ul><li>인물에게 편지 쓰기</li><li>인물의 행동에 대한 의견글</li><li>등장인물 소개하기</li><li>뒷이야기 상상하기</li><li>작품 속 문제 해결하기</li><li>책 소개글·독서감상문</li></ul></article><article><h3>매주 개별 글쓰기 피드백</h3><p>워크북 글에서 잘한 점과 보완할 점을 짚고, 생각을 더 구체적이고 명확하게 표현하도록 돕습니다.</p><p>1·3주차 실시간 미니 글쓰기는 공통 지도하며, 매주 제출하는 독후 글쓰기는 개별 피드백을 제공합니다.</p></article></div></div></section>
+<section class="quiz-section" id="quizzes"><div class="wrap"><div class="section-head"><span class="eyebrow">CLASSROOM CHECK-IN</span><h2>수업을 듣는 것에서 끝나지 않도록,<br>매주 배움을 확인합니다.</h2><p>구글 클래스룸에서 매주 한 번, 주차에 맞는 퀴즈를 진행합니다.</p></div><div class="quiz-grid"><article><span>1·3주차 · 수업 전</span><h3>작품 이해도 퀴즈</h3><p>책 전체를 읽고 이해했는지 확인하는 사실 확인 중심 10문항입니다. 정답률이 80% 미만이면 다시 읽도록 안내하며 재시험은 없습니다.</p></article><article><span>2·4주차 · 수업 후</span><h3>어휘·문법 응용 퀴즈</h3><p>앞선 홀수 주에 배운 어휘와 문법을 새로운 문장과 글에 활용하는지 확인합니다. 수업 예문을 그대로 반복하지 않습니다.</p></article></div><p class="quiz-note">연계도서 확인 퀴즈와 문학독해 수업 내용 확인 퀴즈는 따로 진행하지 않습니다.</p></div></section>
+
+    
+
+
+
+    <section class="review-section" id="reviews">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">REVIEWS & CLASS MOMENTS</span><h2>작품을 읽고 생각을 표현하는<br>아이들의 모습과 학부모 후기</h2></div>
+        <div class="review-tabs"><a href="#feedback-review">글쓰기 피드백 후기</a><a href="#literature-reviews">문학 수업 후기</a><a href="#class-review">수업 속 모습</a></div>
+
+        <div class="review-block photo-review-block" id="feedback-review">
+          <div class="review-block-heading"><span class="eyebrow">01 · WRITING FEEDBACK</span><h3>아이의 글을 읽고<br>구체적인 다음 걸음을 찾습니다.</h3><p>잘한 점을 먼저 짚고, 아이가 쓴 글의 강점과 보완점을 살펴 다음에 적용할 방법을 안내합니다.</p></div>
+          <div class="review-carousel" id="feedback-carousel" aria-label="글쓰기 피드백 학부모 후기 사진을 좌우로 넘겨 볼 수 있습니다">
+            <figure class="review-slide"><a href="assets/feedback-review-01.jpg" target="_blank" rel="noopener"><img src="assets/feedback-review-01.jpg" alt="칭찬을 먼저 하고 구체적인 글쓰기 피드백을 해주어 도움이 되었다는 학부모 후기"></a></figure>
+            <figure class="review-slide"><a href="assets/feedback-review-02.jpg" target="_blank" rel="noopener"><img src="assets/feedback-review-02.jpg" alt="피드백 후 아이가 스스로 책을 읽고 도서관에 가게 되었다는 학부모 후기"></a></figure>
+            <figure class="review-slide"><a href="assets/feedback-review-03.jpg" target="_blank" rel="noopener"><img src="assets/feedback-review-03.jpg" alt="아이의 글을 꼼꼼하게 읽고 주장과 이유를 연결하도록 지도한 데 감사하다는 후기"></a></figure>
+            <figure class="review-slide"><a href="assets/feedback-review-04.jpg" target="_blank" rel="noopener"><img src="assets/feedback-review-04.jpg" alt="피드백 보고서가 시각적으로 정리되어 있고 가정에서 도울 방법도 안내받았다는 후기"></a></figure>
+            <figure class="review-slide"><a href="assets/feedback-review-05.jpg" target="_blank" rel="noopener"><img src="assets/feedback-review-05.jpg" alt="학생용과 학부모용 글쓰기 피드백이 따로 제공되어 좋았다는 후기"></a></figure>
+          </div>
+        </div>
+
+        <div class="review-block photo-review-block" id="literature-reviews">
+          <div class="review-block-heading"><span class="eyebrow">02 · LITERATURE CLASS</span><h3>문학 수업 후기</h3><p>작품을 함께 읽고, 아이가 작품 속 장면과 인물의 마음을 살펴본 수업에 대한 학부모님들의 후기입니다.</p></div>
+          <div class="review-carousel" id="literature-review-carousel" aria-label="문학 수업 후기 사진을 좌우로 넘겨 볼 수 있습니다">
+                        <figure class="review-slide"><a href="assets/week1-review-01.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-01.jpg" alt="문학 수업 후기 사진 1"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-02.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-02.jpg" alt="문학 수업 후기 사진 2"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-03.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-03.jpg" alt="문학 수업 후기 사진 3"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-04.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-04.jpg" alt="문학 수업 후기 사진 4"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-05.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-05.jpg" alt="문학 수업 후기 사진 5"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-06.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-06.jpg" alt="문학 수업 후기 사진 6"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-07.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-07.jpg" alt="문학 수업 후기 사진 7"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-08.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-08.jpg" alt="문학 수업 후기 사진 8"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-09.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-09.jpg" alt="문학 수업 후기 사진 9"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-10.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-10.jpg" alt="문학 수업 후기 사진 10"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-11.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-11.jpg" alt="문학 수업 후기 사진 11"></a></figure>
+            <figure class="review-slide"><a href="assets/week1-review-12.jpg" target="_blank" rel="noopener"><img src="assets/week1-review-12.jpg" alt="문학 수업 후기 사진 12"></a></figure>
+            <figure class="review-slide"><a href="assets/class-review-01.jpg" target="_blank" rel="noopener"><img src="assets/class-review-01.jpg" alt="문학 수업에서 아이가 질문에 답하고 글을 쓴 경험을 전한 학부모 후기"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-14.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-14.jpg" alt="문학 수업 후기 사진 14"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-15.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-15.jpg" alt="문학 수업 후기 사진 15"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-16.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-16.jpg" alt="문학 수업 후기 사진 16"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-17.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-17.jpg" alt="문학 수업 후기 사진 17"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-18.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-18.jpg" alt="문학 수업 후기 사진 18"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-19.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-19.jpg" alt="문학 수업 후기 사진 19"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-20.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-20.jpg" alt="문학 수업 후기 사진 20"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-21.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-21.jpg" alt="문학 수업 후기 사진 21"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-22.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-22.jpg" alt="문학 수업 후기 사진 22"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-23.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-23.jpg" alt="문학 수업 후기 사진 23"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-24.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-24.jpg" alt="문학 수업 후기 사진 24"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-25.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-25.jpg" alt="문학 수업 후기 사진 25"></a></figure>
+            <figure class="review-slide"><a href="assets/literature-review-26.jpg" target="_blank" rel="noopener"><img src="assets/literature-review-26.jpg" alt="문학 수업 후기 사진 26"></a></figure>
+          </div>
+
+        </div>
+
+        <div class="review-block photo-review-block" id="class-review">
+          <div class="review-block-heading"><span class="eyebrow">03 · CLASS MOMENTS</span><h3>수업 속 아이들의 모습</h3><p>수업 자료를 보며 읽고 쓰는 모습과 독후활동 결과를 담았습니다.</p></div>
+          <div class="review-carousel" id="class-photo-carousel" aria-label="아이들의 수업 사진과 활동 자료를 좌우로 넘겨 볼 수 있습니다">
+            <figure class="review-slide"><a href="assets/class-moment-01.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-01.jpg" alt="태블릿으로 문학 수업 활동지를 작성하는 아이"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-02.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-02.jpg" alt="책을 읽고 활동지를 쓰는 아이의 모습"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-03.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-03.jpg" alt="책과 활동지를 펴고 문학 수업 내용을 정리하는 아이"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-04.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-04.jpg" alt="온라인 수업을 들으며 활동지를 작성하는 아이"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-05.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-05.jpg" alt="작품을 읽고 독후활동지를 작성하는 아이"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-06.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-06.jpg" alt="국어 표현 활동지에 아이가 작성한 답과 표시"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-07.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-07.jpg" alt="작품 속 인물과 마음을 살핀 독후활동지"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-08.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-08.jpg" alt="국어 표현 활동지에 작성한 아이의 답"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-09.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-09.jpg" alt="국어 표현 학습 자료에 아이가 직접 적은 풀이"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-10.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-10.jpg" alt="아이의 풀이가 적힌 국어 표현 활동지"></a></figure>
+            <figure class="review-slide"><a href="assets/class-moment-11.jpg" target="_blank" rel="noopener"><img src="assets/class-moment-11.jpg" alt="온라인 문학 수업을 들으며 활동지를 작성하는 아이"></a></figure>
+          </div>
+        </div>
+
+        
+      </div>
+    </section>
+
+    
+
+    <section class="fit-section" id="fit"><div class="wrap"><div class="section-head"><span class="eyebrow">IS THIS CLASS FOR YOU?</span><h2>작품을 읽고 이해하고 표현하는<br>방법을 배우고 싶은 아이를 위한 수업</h2><p>처음부터 책을 잘 읽는 아이만을 위한 수업이 아닙니다. 읽기와 생각, 표현을 차근차근 연습합니다.</p></div><div class="fit-grid"><article class="fit-card good"><h3>이런 아이에게 추천합니다</h3><ul><li>책을 꾸준히 읽지만 내용을 설명하기 어려운 아이</li><li>인물의 마음과 행동 이유를 이해하기 어려운 아이</li><li>책을 읽고 자신의 생각을 말하는 것이 어려운 아이</li><li>작품 속 의미를 깊이 생각하는 경험이 필요한 아이</li><li>독서 후 글쓰기를 힘들어하거나 표현이 비슷한 아이</li><li>작품을 체계적으로 읽고 분석하는 방법을 배우고 싶은 아이</li><li>어휘와 문장 표현의 기본기를 함께 기르고 싶은 아이</li></ul></article><article class="fit-card not"><h3>수업은 이렇게 진행됩니다</h3><ul><li>매주 정해진 독서와 워크북 활동이 있습니다.</li><li>수업 전 책을 읽거나 문제를 풀어야 하는 주차가 있습니다.</li><li>정답만 확인하기보다 작품 속 근거를 찾고 생각을 설명합니다.</li><li>매주 작품 맞춤형 글쓰기와 개별 피드백이 이어집니다.</li></ul></article></div></div></section>
+
+
+
+
+
+    <section class="teacher-section" id="teacher">
+      <div class="wrap teacher-grid">
+        <img class="teacher-photo" src="assets/teacher-yeon.jpg" alt="문학독해 수업을 진행하는 예온쌤">
+        <div class="teacher-copy"><span class="eyebrow">TEACHER</span><h2>책을 읽는 양만큼,<br>어떻게 읽는지도 중요합니다.</h2><p>아이들을 오랫동안 지도하며 책을 읽고도 인물의 마음을 이해하거나 자신의 생각을 표현하는 데 어려움을 겪는 모습을 만나 왔습니다. 그래서 작품을 읽는 방법부터 질문하고 생각하는 방법, 글로 표현하는 방법까지 체계적으로 가르치는 수업을 만들었습니다.</p><div class="teacher-credentials"><span class="credential">국어교육 전공</span><span class="credential">중등 정교사 2급</span><span class="credential">24년 교육 현장 경험</span></div></div>
+      </div>
+    </section>
+
+    <section class="operations-section" id="operations"><div class="wrap"><div class="section-head"><span class="eyebrow">CLASS INFORMATION</span><h2>수업 운영 안내</h2></div><div class="ops-grid"><article><span>수업 횟수</span><strong>월 4회</strong></article><article><span>수업 시간</span><strong>회당 60분 · 실시간 Zoom</strong></article><article><span>초3·4반</span><strong>금요일 저녁 7시 30분</strong></article><article><span>초5·6반</span><strong>금요일 저녁 9시</strong></article><article><span>수업 자료</span><strong>구글 클래스룸 제공</strong></article><article><span>월 수강료</span><strong>12만원</strong></article></div><p class="enrollment-note">매월 모집하며 기존 수강생 우선 선접수 후 잔여석을 모집합니다. 수업 후 녹화본을 제공합니다.</p><div class="ops-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScidhe3F6vaxd08Nj03WfEbTBwfYTOUNco9BIYGUa19HKxdlQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초3·4반 신청</a><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdJi2x88S1RdyPBfvusc630nxcYTZzCTp6jPVUhgncUbJEWWQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초5·6반 신청</a><a class="btn btn-light" href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의하기</a></div></div></section>
+
+    
+
+    
+
+    <section class="faq-section" id="faq"><div class="wrap"><div class="section-head"><span class="eyebrow">Q&A</span><h2>자주 묻는 질문</h2><p>수업 참여 전 궁금한 내용을 확인해 주세요.</p></div><div class="faq-list">
+<details><summary>책을 좋아하지 않는 아이도 참여할 수 있나요?</summary><div class="faq-answer">참여할 수 있습니다. 다만 매주 한 권의 독서 과제가 있어 정해진 책을 읽고 참여하는 과정은 필요합니다. 읽기 전략과 질문 가이드로 작품을 따라가도록 돕습니다.</div></details>
+<details><summary>한 달에 책을 몇 권 읽나요?</summary><div class="faq-answer">매주 한 권씩, 한 달에 총 4권을 읽습니다. 1·3주차에는 빠작 문학독해 수록 작품의 전체 도서를 읽고, 2·4주차에는 수업 후 작품 연계도서를 읽습니다.</div></details>
+<details><summary>책과 빠작 문제집은 직접 준비해야 하나요?</summary><div class="faq-answer">도서와 빠작 문학독해 문제집은 별도로 제공하지 않습니다. 필요한 도서와 문제집 안내에 따라 직접 준비해 주세요. 수업 워크북과 학습 자료는 구글 클래스룸으로 제공합니다.</div></details>
+<details><summary>1·3주차와 2·4주차 수업은 어떻게 다른가요?</summary><div class="faq-answer">1·3주차에는 작품 전체를 읽고 읽기 전략과 질문으로 깊게 살펴봅니다. 2·4주차에는 빠작 문학독해 지문과 문제를 활용해 작품 분석, 문학 개념, 문제풀이 근거를 배웁니다.</div></details>
+<details><summary>빠작 문제는 미리 풀어 와야 하나요?</summary><div class="faq-answer">네. 2·4주차에는 수업 전에 빠작 문학독해 지문을 읽고 문제를 풉니다. 실시간 수업은 작품 분석과 풀이 근거를 살피는 데 집중합니다.</div></details>
+<details><summary>연계도서는 언제 읽나요?</summary><div class="faq-answer">2·4주차 문학독해 수업 후 읽는 필수 독서 과제입니다. 작품에 맞춘 학부모 가이드와 학생용 워크북을 활용해 가정에서 활동하며, 별도의 연계도서 확인 퀴즈는 없습니다.</div></details>
+<details><summary>매주 글쓰기 과제가 있나요?</summary><div class="faq-answer">네. 매주 작품에 맞는 독후 글쓰기 워크북을 작성하고 개별 피드백을 받습니다. 1·3주차 실시간 수업에서는 짧은 글쓰기도 함께 합니다.</div></details>
+<details><summary>글쓰기를 어려워하는 아이도 참여할 수 있나요?</summary><div class="faq-answer">네. 작품을 읽고 질문하고 생각을 나누며 글감을 마련한 뒤 씁니다. 작품과 학년군에 맞는 질문과 워크북으로 생각을 정리하도록 돕습니다.</div></details>
+<details><summary>글쓰기 피드백은 어떻게 진행되나요?</summary><div class="faq-answer">매주 제출한 독후 글쓰기 워크북을 개별로 살펴봅니다. 잘한 점과 보완할 점, 생각을 더 구체적으로 표현하는 방법을 안내합니다. 실시간 미니 글쓰기는 공통 지도합니다.</div></details>
+
+<details><summary>어휘와 문법은 어떤 내용을 배우나요?</summary><div class="faq-answer">어휘와 문법은 모든 학년에서 같은 범위로 배우지 않습니다. 작품과 주차별 학습 목표, 학년군에 맞춰 필요한 내용을 다루며, 관련 학습자료는 매주 별도로 제공합니다.</div></details>
+<details><summary>엄마용 독서 질문 가이드도 제공되나요?</summary><div class="faq-answer">네. 매주 작품의 핵심 전략과 주목할 장면, 맞춤 질문과 꼬리 질문, 가정에서의 대화 및 글쓰기 지도 방법을 담은 가이드를 제공합니다.</div></details>
+<details><summary>클래스룸 퀴즈는 언제 실시하나요?</summary><div class="faq-answer">1·3주차에는 수업 전 작품 이해도 퀴즈, 2·4주차에는 수업 후 홀수 주차 어휘·문법 응용 퀴즈를 진행합니다. 연계도서 확인 퀴즈나 문학독해 내용 확인 퀴즈는 없습니다.</div></details>
+
+<details><summary>수업에 참여하지 못했을 경우 어떻게 하나요?</summary><div class="faq-answer">수업 후 녹화본을 제공합니다.</div></details>
+<details><summary>수업 신청과 수강료는 어떻게 되나요?</summary><div class="faq-answer">매월 모집합니다. 기존 수강생에게 먼저 안내한 뒤 잔여석을 모집하며, 월 수강료는 12만원입니다. 신청과 문의는 카카오톡으로 연락해 주세요.</div></details>
+</div></div></section>
+
+    <section class="cta-section">
+      <div class="wrap"><span class="eyebrow">START WITH A STORY</span><h2>책을 읽는 것에서 끝나지 않도록.</h2><p>인물의 마음을 이해하고, 작품의 의미를 발견하고, 스스로 질문하며 자신의 생각을 말과 글로 표현하도록.<br><strong>책을 읽는 아이에서 작품을 이해하는 아이로.</strong></p><div class="cta-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScidhe3F6vaxd08Nj03WfEbTBwfYTOUNco9BIYGUa19HKxdlQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초3·4반 신청하기</a><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdJi2x88S1RdyPBfvusc630nxcYTZzCTp6jPVUhgncUbJEWWQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초5·6반 신청하기</a><a class="btn btn-light" href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의하기</a></div></div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll(".review-carousel").forEach(rail => {
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        let timer;
+        const startAuto = () => { timer = window.setInterval(() => {
+          if (rail.matches(":hover") || rail.contains(document.activeElement) || rail.dataset.dragged === "true") return;
+          const max = rail.scrollWidth - rail.clientWidth;
+          const next = rail.scrollLeft + rail.clientWidth * 0.78;
+          rail.scrollTo({ left: next >= max - 8 ? 0 : next, behavior: "smooth" });
+        }, 3600); };
+        startAuto();
+      }
+      let startX = 0, startScroll = 0, moved = false;
+      rail.addEventListener("pointerdown", event => {
+        if (event.pointerType !== "mouse" || event.button !== 0) return;
+        startX = event.clientX; startScroll = rail.scrollLeft; moved = false;
+        rail.setPointerCapture(event.pointerId);
+      });
+      rail.addEventListener("pointermove", event => {
+        if (!rail.hasPointerCapture(event.pointerId)) return;
+        const dx = event.clientX - startX;
+        if (Math.abs(dx) > 4) { moved = true; rail.classList.add("is-dragging"); }
+        if (moved) rail.scrollLeft = startScroll - dx;
+      });
+      const finishDrag = event => {
+        if (!rail.hasPointerCapture(event.pointerId)) return;
+        rail.releasePointerCapture(event.pointerId);
+        rail.classList.remove("is-dragging");
+        if (moved) {
+          rail.dataset.dragged = "true";
+          window.setTimeout(() => { delete rail.dataset.dragged; }, 120);
+        }
+      };
+      rail.addEventListener("pointerup", finishDrag);
+      rail.addEventListener("pointercancel", finishDrag);
+      rail.addEventListener("click", event => {
+        if (rail.dataset.dragged === "true") { event.preventDefault(); event.stopPropagation(); }
+      }, true);
+    });
+  </script>
+  <footer><div class="wrap footer-inner"><div><strong>예온쌤 문학독해</strong><br>책을 읽는 아이에서 작품을 이해하고 자신의 생각을 표현하는 아이로.</div><div class="footer-links"><a href="#top">처음으로</a><a href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의</a></div></div></footer>
+</body>
+</html>
