@@ -460,7 +460,7 @@
           <h1><span class="hero-title-first">책을 끝까지 읽는 아이,</span><br>과연 작품을 제대로<br><em>이해하고 있을까요?</em></h1>
           <p class="hero-lead">책을 읽었다는 것과<br>책을 이해했다는 것은 다릅니다.<br><strong>책을 읽는 아이에서<br>작품을 이해하는 아이로.</strong></p>
           <p class="hero-brandline">예온쌤의 문학독해 클래스</p>
-          <div class="hero-actions"><a class="btn" href="#method">수업 구성 보기</a><a class="btn btn-light" href="https://open.kakao.com/o/scRfgdei" target="_blank" rel="noopener">수업 문의하기</a></div>
+          <div class="hero-actions"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScidhe3F6vaxd08Nj03WfEbTBwfYTOUNco9BIYGUa19HKxdlQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초3·4반 신청하기</a><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdJi2x88S1RdyPBfvusc630nxcYTZzCTp6jPVUhgncUbJEWWQ/viewform?usp=publish-editor" target="_blank" rel="noopener">초5·6반 신청하기</a></div>
           
         </div>
         <div class="hero-art" aria-label="문학 작품 분석을 표현한 책 모양 그림">
@@ -646,14 +646,14 @@
   <script>
     document.querySelectorAll(".review-carousel").forEach(rail => {
       window.setInterval(() => {
-        if (rail.matches(":hover") || rail.contains(document.activeElement) || rail.dataset.dragged === "true") return;
+        if (rail.dataset.dragged === "true") return;
         const max = rail.scrollWidth - rail.clientWidth;
         if (max <= 0) return;
         const slide = rail.querySelector(".review-slide");
         const step = slide ? slide.getBoundingClientRect().width + 18 : rail.clientWidth * 0.78;
         const next = rail.scrollLeft + step;
         rail.scrollTo({ left: next >= max - 8 ? 0 : next, behavior: "smooth" });
-      }, 3600);
+      }, 3000);
       let startX = 0, startScroll = 0, moved = false;
       rail.addEventListener("pointerdown", event => {
         if (event.pointerType !== "mouse" || event.button !== 0) return;
